@@ -94,13 +94,15 @@ class Controller extends BaseController
         ];
 
         $validatedData = request()->validate($rules, $messages);
+       
 
         try {
             # lever une exception si le mot de passe de l'utilisateur n'est pas correct
             $user = $this->repository->getSuperUser($validatedData['id'], $validatedData['password']);
-
+           
             # se souvenir de l'authentification de l'utilisateur
             request()->session()->put('user', $user);
+         
 
             return redirect()->route('list');
         } catch (Exception $e) {
@@ -175,6 +177,7 @@ class Controller extends BaseController
         $country = $validatedData['country'];
         $city = $validatedData['city'];
         $idSuperUser = session()->get('user')['id'];
+       
 
         //socials networks
         $github =  request()->input('github');
@@ -242,6 +245,7 @@ class Controller extends BaseController
             );
             return redirect()->route('list.show')->with('message', 'Profil créer avec succès !');
         } catch (Exception $e) {
+           
             return redirect()->back();
         }
     }
@@ -948,4 +952,6 @@ class Controller extends BaseController
         ]);
     }
     //============================End List section ===========================//
+
+   
 }

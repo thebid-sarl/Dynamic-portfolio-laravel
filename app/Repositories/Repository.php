@@ -26,7 +26,7 @@ class Repository
 
     function getSuperUser(string $idSuperUser, string $password): array
     {
-        $rows = DB::table('SuperUser')
+        $rows = DB::table('superuser')
             ->where('id', $idSuperUser)
             ->get();
 

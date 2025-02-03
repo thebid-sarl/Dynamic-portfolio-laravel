@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VisitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,3 +97,5 @@ Route::get('/login', [Controller::class, 'loginShow'])->name('login.show');
 Route::post('/login', [Controller::class, 'login'])->name('login.post');
 Route::post('/logout', [Controller::class, 'logout'])->name('logout');
 //========================End Login/logout=======================//
+
+Route::get('/visits', [VisitController::class, 'index']);
