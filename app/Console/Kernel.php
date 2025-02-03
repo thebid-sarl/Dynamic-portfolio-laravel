@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('send:visitor-stats')->weeklyOn(5, '23:59');;
+
     }
 
     /**
@@ -25,8 +26,11 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
+        \App\Console\Commands\SendVisitorStats::class;
+
         $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');
+        
     }
 }

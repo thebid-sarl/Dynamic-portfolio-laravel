@@ -21,14 +21,11 @@ class TrackVisitor
         if ($request->is('/')) {          
             $ipAddress = $request->ip();
             Log::info("Visite de la page d'accueil. IP: " . $ipAddress);
-            if ($this->isLocal($ipAddress)) {
-                Log::info("Exclusion de l'IP locale: " . $ipAddress);
-                return $next($request); 
+            if ( !$this->isLocal($ipAddress)) {
+                event(new VisitorVisited($ipAddress));        
+            Log::info("Enregistrement dans la session pour l'IP: " . $ipAddress);
             }
 
-            event(new VisitorVisited($ipAddress));
-            
-            Log::info("Enregistrement dans la session pour l'IP: " . $ipAddress);
         }
 
         return $next($request);
