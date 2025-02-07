@@ -19,7 +19,8 @@
     <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <livewire:styles />
     <!-- Template Main CSS File -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -32,6 +33,8 @@
     <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/typed.js/typed.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/waypoints/noframework.waypoints.js') }}"></script>
+    <livewire:scripts />
+     
 
 
 </head>

@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Likeable;
 
 class Person extends Model
 {
-    use HasFactory;
+    use HasFactory,Likeable;
+
     protected $table = 'Person'; 
 
     protected $fillable = [

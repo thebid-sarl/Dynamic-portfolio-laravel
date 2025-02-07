@@ -5,6 +5,7 @@ namespace App\Repositories;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Person;
 
 class Repository
 {
@@ -319,4 +320,130 @@ class Repository
     }
 
     //=============================End Certificate============================================//
+
+    //=============================like and dislike ============================================//
+
+     /**
+     * Vérifie si l'IP ou l'utilisateur a déjà liké cette personne.
+     */
+    public function hasLiked($personId, $ipAddress, $userId = null)
+    {
+        $query = DB::table('likeable_likes')
+            ->where('likeable_id', $personId)
+            ->where('likeable_type', Person::class);
+
+        // Vérifier par IP ou par user_id
+        if ($userId) {
+            $query->where('user_id', $userId);
+        } else {
+            $query->where('ip_address', $ipAddress);
+        }
+     
+        return $query->exists();
+    }
+
+    /**
+     * Ajoute un like pour une personne.
+     */
+    public function like($personId, $ipAddress, $userId = null)
+    {
+        // Insérer un enregistrement dans la table 'likeable_likes'
+        DB::table('likeable_likes')->insert([
+            'likeable_id' => $personId,
+            'likeable_type' => Person::class,
+            'user_id' => $userId,
+            'ip_address' => $ipAddress,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        // Mettre à jour le compteur de likes dans 'likeable_like_counters'
+        $this->incrementLikeCounter($personId);
+    }
+
+     /**
+     * Retire un like pour une personne.
+     */
+    public function unlike($personId, $ipAddress, $userId = null)
+    {
+        // Supprimer l'enregistrement dans la table 'likeable_likes'
+        DB::table('likeable_likes')
+            ->where('likeable_id', $personId)
+            ->where('likeable_type', Person::class)
+            ->where(function($query) use ($ipAddress, $userId) {
+                if ($userId) {
+                    $query->where('user_id', $userId);
+                } else {
+                    $query->where('ip_address', $ipAddress);
+                }
+            })
+            ->delete();
+
+        // Mettre à jour le compteur de likes dans 'likeable_like_counters'
+        $this->decrementLikeCounter($personId);
+    }
+
+     /**
+     * Incrémente le compteur de likes dans la table 'likeable_like_counters'
+     */
+    private function incrementLikeCounter($personId)
+    {
+        // Vérifier si le compteur existe déjà pour cet élément
+        $counter = DB::table('likeable_like_counters')
+            ->where('likeable_id', $personId)
+            ->where('likeable_type', Person::class)
+            ->first();
+
+        if ($counter) {
+            // Incrémenter le compteur si l'enregistrement existe
+            DB::table('likeable_like_counters')
+                ->where('likeable_id', $personId)
+                ->where('likeable_type', Person::class)
+                ->increment('count');
+        } else {
+            // Sinon, créer un nouvel enregistrement avec un compteur initial à 1
+            DB::table('likeable_like_counters')->insert([
+                'likeable_id' => $personId,
+                'likeable_type' => Person::class,
+                'count' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+        }
+    }
+
+     /**
+     * Décrémente le compteur de likes dans la table 'likeable_like_counters'
+     */
+    private function decrementLikeCounter($personId)
+    {
+        // Vérifier si le compteur existe déjà pour cet élément
+        $counter = DB::table('likeable_like_counters')
+            ->where('likeable_id', $personId)
+            ->where('likeable_type', Person::class)
+            ->first();
+
+        if ($counter && $counter->count > 0) {
+            // Décrémenter le compteur si l'enregistrement existe
+            DB::table('likeable_like_counters')
+                ->where('likeable_id', $personId)
+                ->where('likeable_type', Person::class)
+                ->decrement('count');
+        }
+    }
+
+    /**
+     * Récupère le nombre total de likes pour une personne.
+     */
+    public function getLikeCount($personId)
+    {
+        $likeCounter = DB::table('likeable_like_counters')
+            ->where('likeable_id', $personId)
+            ->where('likeable_type', Person::class)
+            ->first();
+
+        return $likeCounter ? $likeCounter->count : 0;
+    }
+
+
 }

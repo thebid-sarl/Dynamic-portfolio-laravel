@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use App\Models\Person;
 
 use Carbon\Carbon; // Include Class in COntroller
 use Exception;
@@ -118,6 +119,24 @@ class Controller extends BaseController
         return redirect()->route('login.show');
     }
 
+    public function toggleLike(Request $request)
+    {
+        try {
+            $ip = $request->ip();         
+            $like = Like::where('ip_address', $ip)->first();
+            if ($like) {
+                $like->update(['has_liked' => !$like->has_liked]);
+                return response()->json(['message' => 'Like mis à jour', 'has_liked' => $like->has_liked]);
+            }
+            Like::create(['ip_address' => $ip, 'has_liked' => true]);
+            return response()->json(['message' => 'Like ajouté', 'has_liked' => true]);
+        } catch (\Exception $e) {
+            dd($e);
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    
     //Create Profil
     public function showCreateProfil()
     {

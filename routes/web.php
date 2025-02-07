@@ -99,3 +99,5 @@ Route::post('/logout', [Controller::class, 'logout'])->name('logout');
 //========================End Login/logout=======================//
 
 Route::get('/visits', [VisitController::class, 'index']);
+
+Route::post('/toggle-like', [Controller::class, 'toggleLike']);

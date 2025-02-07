@@ -76,8 +76,9 @@
 
 
     <main id="main">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- ======= About Section ======= -->
+            <!-- ======= About Section ======= -->
         <section id="about" class="about">
             <div class="container">
 
@@ -130,12 +131,50 @@
                                 </div>
                             </div>
                             <p style="text-align: justify">{{ $person->presentation }}</p>
+                            <div class="row">
+                            <div class="col">
+                            <!-- Like / Dislike Section -->
+                            <livewire:like-dislike />
+                            </div>
+                            <div class="col">
+                            @livewire('average-rating')
+
+                             <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" style="float: right;">
+        Donner ma note
+    </button>                        
+                            </div>
+                        </div>
                         </div>
                     </div>
                 @endif
             </div>
         </section>
         <!-- End About Section -->
+<!-- =============== Modal for Rating  ======================= -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitle">Donner votre note</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body text-center">
+                     <!-- Rate Section -->
+                     <livewire:rate-content />
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- =================== End Modal ====================== -->
 
         <!-- ======= Skills Section ======= -->
         <section id="skills" class="skills section-bg">
@@ -371,4 +410,8 @@
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
+
+   
+
+
 @endsection

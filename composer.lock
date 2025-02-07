@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c15651241c41e793e7d10b29025423b1",
+    "content-hash": "2fd2e53b3458be714a87c61872f7ac84",
     "packages": [
         {
             "name": "brick/math",
@@ -2071,6 +2071,82 @@
             "time": "2024-12-08T08:18:47+00:00"
         },
         {
+            "name": "livewire/livewire",
+            "version": "v3.5.19",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/livewire/livewire.git",
+                "reference": "3f1b2c134cde537bb7666e490ea21a8ffc8bbf14"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/3f1b2c134cde537bb7666e490ea21a8ffc8bbf14",
+                "reference": "3f1b2c134cde537bb7666e490ea21a8ffc8bbf14",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^10.0|^11.0",
+                "illuminate/routing": "^10.0|^11.0",
+                "illuminate/support": "^10.0|^11.0",
+                "illuminate/validation": "^10.0|^11.0",
+                "laravel/prompts": "^0.1.24|^0.2|^0.3",
+                "league/mime-type-detection": "^1.9",
+                "php": "^8.1",
+                "symfony/console": "^6.0|^7.0",
+                "symfony/http-kernel": "^6.2|^7.0"
+            },
+            "require-dev": {
+                "calebporzio/sushi": "^2.1",
+                "laravel/framework": "^10.15.0|^11.0",
+                "mockery/mockery": "^1.3.1",
+                "orchestra/testbench": "^8.21.0|^9.0",
+                "orchestra/testbench-dusk": "^8.24|^9.1",
+                "phpunit/phpunit": "^10.4",
+                "psy/psysh": "^0.11.22|^0.12"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Livewire": "Livewire\\Livewire"
+                    },
+                    "providers": [
+                        "Livewire\\LivewireServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Livewire\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caleb Porzio",
+                    "email": "calebporzio@gmail.com"
+                }
+            ],
+            "description": "A front-end framework for Laravel.",
+            "support": {
+                "issues": "https://github.com/livewire/livewire/issues",
+                "source": "https://github.com/livewire/livewire/tree/v3.5.19"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/livewire",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-01-28T21:39:51+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "3.8.1",
             "source": {
@@ -3362,6 +3438,75 @@
                 }
             ],
             "time": "2024-04-27T21:32:50+00:00"
+        },
+        {
+            "name": "rtconner/laravel-likeable",
+            "version": "3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rtconner/laravel-likeable.git",
+                "reference": "c5076ecaf0f9693ad2fcf04110163f65dc308541"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rtconner/laravel-likeable/zipball/c5076ecaf0f9693ad2fcf04110163f65dc308541",
+                "reference": "c5076ecaf0f9693ad2fcf04110163f65dc308541",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": ">=8.0",
+                "illuminate/support": ">=8.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "1.*",
+                "orchestra/testbench": "6.*",
+                "phpunit/phpunit": "9.*",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Conner\\Likeable\\LikeableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Conner\\Likeable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Conner",
+                    "email": "rtconner@smarter.bz"
+                }
+            ],
+            "description": "Trait for Laravel Eloquent models to allow easy implementation of a 'like' or 'favorite' or 'remember' feature.",
+            "homepage": "https://smartersoftware.net/packages/laravel-likeable-favorite",
+            "keywords": [
+                "Follow",
+                "eloquent",
+                "favorite",
+                "favourite",
+                "laravel",
+                "laravel5",
+                "likable",
+                "like",
+                "likeable",
+                "remember",
+                "trait"
+            ],
+            "support": {
+                "issues": "https://github.com/rtconner/laravel-likeable/issues",
+                "source": "https://github.com/rtconner/laravel-likeable/tree/3.2.0"
+            },
+            "time": "2021-05-26T00:42:43+00:00"
         },
         {
             "name": "symfony/clock",
